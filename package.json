@@ -1,0 +1,23 @@
+{
+  "name": "set-open-graph",
+  "version": "0.1.0-dev",
+  "description": "Setting Open Graph meta tags of the html",
+  "main": "dist/setOpenGraph.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fenivana/set-open-graph.git"
+  },
+  "keywords": [
+    "open graph",
+    "meta"
+  ],
+  "author": "Jiang Fengming",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fenivana/set-open-graph/issues"
+  },
+  "homepage": "https://github.com/fenivana/set-open-graph#readme"
+}
