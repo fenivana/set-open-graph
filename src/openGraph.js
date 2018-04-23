@@ -46,7 +46,9 @@ function insertElem(attrs) {
   document.head.appendChild(meta)
 }
 
-function set(openGraph, namespace) {
+export function set(openGraph, namespace) {
+  clear()
+
   let ns = ['og: http://ogp.me/ns#']
   if (openGraph.fb) ns.push('fb: http://ogp.me/ns/fb#')
 
@@ -64,7 +66,7 @@ function set(openGraph, namespace) {
   for (const m of meta) insertElem(m)
 }
 
-function clear() {
+export function clear() {
   document.head.removeAttribute('prefix')
   const els = document.head.querySelectorAll('meta[property]')
   for (const el of els) document.head.removeChild(el)

@@ -1,19 +1,21 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['module', 'exports'], factory);
+    define(['exports'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(module, exports);
+    factory(exports);
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod, mod.exports);
+    factory(mod.exports);
     global.openGraph = mod.exports;
   }
-})(this, function (module, exports) {
+})(this, function (exports) {
   'use strict';
 
   exports.__esModule = true;
+  exports.set = set;
+  exports.clear = clear;
   var trimLastPart = ['og:image:url', 'og:video:url', 'og:audio:url', 'og:locale:current', 'music:album:url', 'music:song:url', 'video:actor:url'];
 
   function parse(obj) {
@@ -70,6 +72,8 @@
   }
 
   function set(openGraph, namespace) {
+    clear();
+
     var ns = ['og: http://ogp.me/ns#'];
     if (openGraph.fb) ns.push('fb: http://ogp.me/ns/fb#');
 
@@ -122,5 +126,4 @@
   }
 
   exports.default = { set: set, clear: clear };
-  module.exports = exports['default'];
 });
