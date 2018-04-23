@@ -2,7 +2,7 @@
   "name": "set-open-graph",
   "version": "0.1.0-dev",
   "description": "Setting Open Graph meta tags of the html",
-  "main": "dist/setOpenGraph.js",
+  "main": "dist/openGraph.js",
   "scripts": {
     "build": "babel src -d dist"
   },
