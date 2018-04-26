@@ -3,13 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-<script src="../dist/openGraph.js"></script>
+<script src="../dist/OpenGraph.js"></script>
 <script>
+const openGraph = new OpenGraph({
+  og: {
+    site_name: 'Company Name',
+    image: 'https://www.example.com/thumb.png'
+  }
+})
+
 openGraph.set({
   "og": {
     "title": "Arrival of a Train at La Ciotat",
     "description": "L'arrivée d'un train en gare de La Ciotat is an 1895 French short black-and-white silent documentary film directed and produced by Auguste and Louis Lumière. Its first public showing took place in January 1896.",
-    "site_name": "Open Graph protocol examples",
     "type": "video.movie",
     "locale": {
       "current": "en_US",

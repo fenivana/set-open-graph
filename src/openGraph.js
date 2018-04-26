@@ -8,68 +8,83 @@ const trimLastPart = [
   'video:actor:url'
 ]
 
-function parse(obj, prefix = '') {
-  let result = []
+class OpenGraph {
+  constructor(properties, customNS) {
+    this.properties = properties
+    this.customNS = customNS
+  }
 
-  for (const k in obj) {
-    const v = obj[k]
-    if (!v) continue
+  set(properties, customNS) {
+    this.clear()
 
-    let property = prefix ? prefix + ':' + k : k
-    if (trimLastPart.includes(property)) property = prefix
+    let ns = ['og: http://ogp.me/ns#']
+    if (properties.fb) ns.push('fb: http://ogp.me/ns/fb#')
 
-    if (v.constructor === Object) {
-      result = result.concat(parse(v, property))
-    } else if (v.constructor === Array) {
-      for (const item of v) {
-        if (item.constructor === Object) {
-          result = result.concat(parse(item, property))
-        } else {
-          result.push({ property, item })
-        }
-      }
-    } else {
-      result.push({ property, v })
+    let type = properties.og && properties.og.type
+    if (type && !type.includes(':')) {
+      type = type.split('.')[0]
+      ns.push(`${type}: http://ogp.me/ns/${type}#`)
     }
+
+    if (customNS) ns = ns.concat(customNS)
+    else if (this.customNS) ns = ns.concat(this.customNS)
+
+    document.head.setAttribute('prefix', ns.join(' '))
+
+    let meta = this.parse(properties)
+
+    if (this.properties) {
+      const exists = meta.map(m => m.property)
+      const defaultMeta = this.parse(this.properties).filter(m => !exists.includes(m.property))
+      if (defaultMeta.length) meta = meta.concat(defaultMeta)
+    }
+
+    for (const m of meta) this.insertElem(m)
   }
 
-  return result
-}
-
-function insertElem(attrs) {
-  const meta = document.createElement('meta')
-
-  for (const name in attrs) {
-    meta.setAttribute(name, attrs[name])
+  clear() {
+    document.head.removeAttribute('prefix')
+    const els = document.head.querySelectorAll('meta[property]')
+    for (const el of els) document.head.removeChild(el)
   }
 
-  document.head.appendChild(meta)
-}
+  parse(obj, prefix = '') {
+    let result = []
 
-export function set(openGraph, namespace) {
-  clear()
+    for (const k in obj) {
+      const v = obj[k]
+      if (!v) continue
 
-  let ns = ['og: http://ogp.me/ns#']
-  if (openGraph.fb) ns.push('fb: http://ogp.me/ns/fb#')
+      let property = prefix ? prefix + ':' + k : k
+      if (trimLastPart.includes(property)) property = prefix
 
-  let type = openGraph.og && openGraph.og.type
-  if (type && !type.includes(':')) {
-    type = type.split('.')[0]
-    ns.push(`${type}: http://ogp.me/ns/${type}#`)
+      if (v.constructor === Object) {
+        result = result.concat(this.parse(v, property))
+      } else if (v.constructor === Array) {
+        for (const item of v) {
+          if (item.constructor === Object) {
+            result = result.concat(this.parse(item, property))
+          } else {
+            result.push({ property, item })
+          }
+        }
+      } else {
+        result.push({ property, v })
+      }
+    }
+
+    return result
   }
 
-  if (namespace) ns = ns.concat(namespace)
+  insertElem(attrs) {
+    const meta = document.createElement('meta')
 
-  document.head.setAttribute('prefix', ns.join(' '))
+    for (const name in attrs) {
+      meta.setAttribute(name, attrs[name])
+    }
 
-  const meta = parse(openGraph)
-  for (const m of meta) insertElem(m)
+    document.head.appendChild(meta)
+  }
 }
 
-export function clear() {
-  document.head.removeAttribute('prefix')
-  const els = document.head.querySelectorAll('meta[property]')
-  for (const el of els) document.head.removeChild(el)
-}
-
-export default { set, clear }
+export default OpenGraph

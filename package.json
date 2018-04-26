@@ -2,7 +2,7 @@
   "name": "set-open-graph",
   "version": "0.1.0-dev",
   "description": "Setting Open Graph meta tags of the html",
-  "main": "dist/openGraph.js",
+  "main": "dist/OpenGraph.js",
   "scripts": {
     "build": "babel src -d dist"
   },
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/fenivana/set-open-graph#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.19.1",
@@ -37,6 +38,10 @@
         }
       ],
       "stage-2"
+    ],
+
+    "plugins": [
+      "add-module-exports"
     ]
   },
   "eslintConfig": {
