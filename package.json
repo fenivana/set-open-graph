@@ -1,6 +1,6 @@
 {
   "name": "set-open-graph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Setting Open Graph meta tags of the html",
   "main": "dist/OpenGraph.js",
   "scripts": {
