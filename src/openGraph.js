@@ -65,11 +65,11 @@ class OpenGraph {
           if (item.constructor === Object) {
             result = result.concat(this.parse(item, property))
           } else {
-            result.push({ property, item })
+            result.push({ property, content: item })
           }
         }
       } else {
-        result.push({ property, v })
+        result.push({ property, content: v })
       }
     }
 

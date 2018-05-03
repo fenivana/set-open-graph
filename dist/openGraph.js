@@ -128,11 +128,11 @@
             if (item.constructor === Object) {
               result = result.concat(this.parse(item, property));
             } else {
-              result.push({ property: property, item: item });
+              result.push({ property: property, content: item });
             }
           }
         } else {
-          result.push({ property: property, v: v });
+          result.push({ property: property, content: v });
         }
       }
 
