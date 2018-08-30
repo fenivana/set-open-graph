@@ -1,52 +1,34 @@
 (function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(['module', 'exports'], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(module, exports);
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod, mod.exports);
-    global.OpenGraph = mod.exports;
-  }
-})(this, function (module, exports) {
-  'use strict';
-
-  exports.__esModule = true;
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.OpenGraph = factory());
+}(this, (function () { 'use strict';
 
   var trimLastPart = ['og:image:url', 'og:video:url', 'og:audio:url', 'og:locale:current', 'music:album:url', 'music:song:url', 'video:actor:url'];
 
-  var OpenGraph = function () {
+  var OpenGraph =
+  /*#__PURE__*/
+  function () {
     function OpenGraph(properties, customNS) {
-      _classCallCheck(this, OpenGraph);
-
       this.properties = properties;
       this.customNS = customNS;
     }
 
-    OpenGraph.prototype.set = function set(properties, customNS) {
-      this.clear();
+    var _proto = OpenGraph.prototype;
 
+    _proto.set = function set(properties, customNS) {
+      this.clear();
       var ns = ['og: http://ogp.me/ns#'];
       if (properties.fb) ns.push('fb: http://ogp.me/ns/fb#');
-
       var type = properties.og && properties.og.type;
+
       if (type && !type.includes(':')) {
         type = type.split('.')[0];
-        ns.push(type + ': http://ogp.me/ns/' + type + '#');
+        ns.push(type + ": http://ogp.me/ns/" + type + "#");
       }
 
       if (customNS) ns = ns.concat(customNS);else if (this.customNS) ns = ns.concat(this.customNS);
-
       document.head.setAttribute('prefix', ns.join(' '));
-
       var meta = this.parse(properties);
 
       if (this.properties) {
@@ -76,9 +58,10 @@
       }
     };
 
-    OpenGraph.prototype.clear = function clear() {
+    _proto.clear = function clear() {
       document.head.removeAttribute('prefix');
       var els = document.head.querySelectorAll('meta[property]');
+
       for (var _iterator2 = els, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
         var _ref2;
 
@@ -96,15 +79,16 @@
       }
     };
 
-    OpenGraph.prototype.parse = function parse(obj) {
-      var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    _proto.parse = function parse(obj, prefix) {
+      if (prefix === void 0) {
+        prefix = '';
+      }
 
       var result = [];
 
       for (var k in obj) {
         var v = obj[k];
         if (!v) continue;
-
         var property = prefix ? prefix + ':' + k : k;
         if (trimLastPart.includes(property)) property = prefix;
 
@@ -128,18 +112,24 @@
             if (item.constructor === Object) {
               result = result.concat(this.parse(item, property));
             } else {
-              result.push({ property: property, content: item });
+              result.push({
+                property: property,
+                content: item
+              });
             }
           }
         } else {
-          result.push({ property: property, content: v });
+          result.push({
+            property: property,
+            content: v
+          });
         }
       }
 
       return result;
     };
 
-    OpenGraph.prototype.insertElem = function insertElem(attrs) {
+    _proto.insertElem = function insertElem(attrs) {
       var meta = document.createElement('meta');
 
       for (var name in attrs) {
@@ -152,6 +142,6 @@
     return OpenGraph;
   }();
 
-  exports.default = OpenGraph;
-  module.exports = exports['default'];
-});
+  return OpenGraph;
+
+})));
