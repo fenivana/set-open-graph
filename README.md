@@ -97,11 +97,13 @@ Creating an instance.
 
 Params:
 
-`properties`: Default properties. For example you can set `og:site_name` here so you don't need to set it every time when calling `openGraph.set()`.  
-`customNS`: String or Array. Default custom namespace. e.g.:
-```
-'my_namespace: http://example.com/ns#'
-['my_namespace: http://example.com/ns#', 'another_namespace: http://example.com/ns/another#']
+`properties`: Object. Default properties. For example you can set `og:site_name` here so you don't need to set it every time when calling `openGraph.set()`.  
+`customNS`: Object. Default custom namespace. e.g.:
+```js
+{
+  my_namespace: 'http://example.com/ns#',
+  another_namespace: 'http://example.com/ns/another#'
+}
 ```
 
 ### openGraph.set(properties, customNS)

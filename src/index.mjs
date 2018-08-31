@@ -17,19 +17,26 @@ class OpenGraph {
   set(properties, customNS) {
     this.clear()
 
-    let ns = ['og: http://ogp.me/ns#']
-    if (properties.fb) ns.push('fb: http://ogp.me/ns/fb#')
+    const ns = {
+      og: 'http://ogp.me/ns#'
+    }
+
+    if (properties.fb) ns.fb = 'http://ogp.me/ns/fb#'
 
     let type = properties.og && properties.og.type
     if (type && !type.includes(':')) {
       type = type.split('.')[0]
-      ns.push(`${type}: http://ogp.me/ns/${type}#`)
+      ns[type] = `http://ogp.me/ns/${type}#`
     }
 
-    if (customNS) ns = ns.concat(customNS)
-    else if (this.customNS) ns = ns.concat(this.customNS)
+    if (customNS !== null && (customNS || this.customNS)) {
+      Object.assign(ns, customNS || this.customNS)
+    }
 
-    document.head.setAttribute('prefix', ns.join(' '))
+
+    const prefix = Object.entries(ns).map(([k, v]) => k + ': ' + v).join(' ')
+
+    document.head.setAttribute('prefix', prefix)
 
     let meta = this.parse(properties)
 
