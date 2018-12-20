@@ -3,8 +3,8 @@ var trimLastPart = ['og:image:url', 'og:video:url', 'og:audio:url', 'og:locale:c
 var OpenGraph =
 /*#__PURE__*/
 function () {
-  function OpenGraph(properties, customNS) {
-    this.properties = properties;
+  function OpenGraph(defaults, customNS) {
+    this.defaults = defaults;
     this.customNS = customNS;
   }
 
@@ -35,11 +35,11 @@ function () {
     document.head.setAttribute('prefix', prefix);
     var meta = this.parse(properties);
 
-    if (this.properties) {
+    if (this.defaults) {
       var exists = meta.map(function (m) {
         return m.property;
       });
-      var defaultMeta = this.parse(this.properties).filter(function (m) {
+      var defaultMeta = this.parse(this.defaults).filter(function (m) {
         return !exists.includes(m.property);
       });
       if (defaultMeta.length) meta = meta.concat(defaultMeta);

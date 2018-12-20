@@ -91,13 +91,13 @@ video:actor:url -> video:actor
 
 ## APIs
 
-### new OpenGraph(properties, customNS)
+### new OpenGraph(defaults, customNS)
 
 Creating an instance.
 
 Params:
 
-`properties`: Object. Default properties. For example you can set `og:site_name` here so you don't need to set it every time when calling `openGraph.set()`.  
+`defaults`: Object. Default properties. For example you can set `og:site_name` here so you don't need to set it every time when calling `openGraph.set()`.  
 `customNS`: Object. Default custom namespace. e.g.:
 ```js
 {
@@ -105,6 +105,8 @@ Params:
   another_namespace: 'http://example.com/ns/another#'
 }
 ```
+
+You can reset `defaults` and `customNS` by setting `this.defaults` and `this.customNS`.
 
 ### openGraph.set(properties, customNS)
 

@@ -9,8 +9,8 @@ const trimLastPart = [
 ]
 
 class OpenGraph {
-  constructor(properties, customNS) {
-    this.properties = properties
+  constructor(defaults, customNS) {
+    this.defaults = defaults
     this.customNS = customNS
   }
 
@@ -40,9 +40,9 @@ class OpenGraph {
 
     let meta = this.parse(properties)
 
-    if (this.properties) {
+    if (this.defaults) {
       const exists = meta.map(m => m.property)
-      const defaultMeta = this.parse(this.properties).filter(m => !exists.includes(m.property))
+      const defaultMeta = this.parse(this.defaults).filter(m => !exists.includes(m.property))
       if (defaultMeta.length) meta = meta.concat(defaultMeta)
     }
 

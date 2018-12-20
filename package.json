@@ -2,8 +2,7 @@
   "name": "set-open-graph",
   "version": "0.2.0",
   "description": "Setting Open Graph meta tags of the html",
-  "main": "dist/OpenGraph.js",
-  "module": "dist/OpenGraph.mjs",
+  "main": "dist/OpenGraph",
   "scripts": {
     "build": "rollup -c rollup.config.esm.mjs && rollup -c rollup.config.umd.mjs"
   },
@@ -22,13 +21,13 @@
   },
   "homepage": "https://github.com/fenivana/set-open-graph#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.4.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
     "eslint-config-enough": "^0.3.4",
-    "rollup": "^0.65.0",
-    "rollup-plugin-babel": "^4.0.2"
+    "rollup": "^0.68.1",
+    "rollup-plugin-babel": "^4.1.0"
   },
   "babel": {
     "presets": [

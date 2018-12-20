@@ -1,16 +1,16 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.OpenGraph = factory());
-}(this, (function () { 'use strict';
+  (global = global || self, global.OpenGraph = factory());
+}(this, function () { 'use strict';
 
   var trimLastPart = ['og:image:url', 'og:video:url', 'og:audio:url', 'og:locale:current', 'music:album:url', 'music:song:url', 'video:actor:url'];
 
   var OpenGraph =
   /*#__PURE__*/
   function () {
-    function OpenGraph(properties, customNS) {
-      this.properties = properties;
+    function OpenGraph(defaults, customNS) {
+      this.defaults = defaults;
       this.customNS = customNS;
     }
 
@@ -41,11 +41,11 @@
       document.head.setAttribute('prefix', prefix);
       var meta = this.parse(properties);
 
-      if (this.properties) {
+      if (this.defaults) {
         var exists = meta.map(function (m) {
           return m.property;
         });
-        var defaultMeta = this.parse(this.properties).filter(function (m) {
+        var defaultMeta = this.parse(this.defaults).filter(function (m) {
           return !exists.includes(m.property);
         });
         if (defaultMeta.length) meta = meta.concat(defaultMeta);
@@ -154,4 +154,4 @@
 
   return OpenGraph;
 
-})));
+}));
