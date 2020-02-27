@@ -1,7 +1,7 @@
 {
   "name": "set-open-graph",
   "version": "0.3.0",
-  "description": "Setting Open Graph meta tags of the HTML",
+  "description": "Setting Open Graph meta tags of the document",
   "main": "dist/OpenGraph.js",
   "scripts": {
     "build": "rollup -c"

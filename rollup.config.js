@@ -1,11 +1,13 @@
 import babel from 'rollup-plugin-babel'
 
 export default {
-  input: 'src/index.mjs',
+  input: 'src/index.js',
+
   output: {
     format: 'es',
-    file: 'dist/OpenGraph.mjs'
+    file: 'dist/OpenGraph.js'
   },
+
   plugins: [
     babel()
   ]
