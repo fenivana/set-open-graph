@@ -1,10 +1,10 @@
 {
   "name": "set-open-graph",
   "version": "0.3.0",
-  "description": "Setting Open Graph meta tags of the html",
-  "main": "dist/OpenGraph",
+  "description": "Setting Open Graph meta tags of the HTML",
+  "main": "dist/OpenGraph.js",
   "scripts": {
-    "build": "rollup -c rollup.config.esm.mjs && rollup -c rollup.config.umd.mjs"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/kasha-io/set-open-graph#readme",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.10.0",
-    "eslint-config-enough": "^0.3.4",
-    "rollup": "^0.68.1",
-    "rollup-plugin-babel": "^4.1.0"
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-enough": "^0.3.8",
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3"
   },
   "babel": {
     "presets": [

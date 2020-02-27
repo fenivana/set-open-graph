@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-<script src="../dist/OpenGraph.js"></script>
-<script>
+
+<script type="module">
+import OpenGraph from '../src/index.js'
+
 const openGraph = new OpenGraph({
   og: {
     site_name: 'Company Name',
