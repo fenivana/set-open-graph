@@ -13,7 +13,11 @@ var OpenGraph = /*#__PURE__*/function () {
     var ns = {
       og: 'http://ogp.me/ns#'
     };
-    if (properties.fb) ns.fb = 'http://ogp.me/ns/fb#';
+
+    if (properties.fb) {
+      ns.fb = 'http://ogp.me/ns/fb#';
+    }
+
     var type = properties.og && properties.og.type;
 
     if (type && !type.includes(':')) {
@@ -40,7 +44,10 @@ var OpenGraph = /*#__PURE__*/function () {
       var defaultMeta = this.parse(this.defaults).filter(function (m) {
         return !exists.includes(m.property);
       });
-      if (defaultMeta.length) meta = meta.concat(defaultMeta);
+
+      if (defaultMeta.length) {
+        meta = meta.concat(defaultMeta);
+      }
     }
 
     for (var _iterator = meta, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -90,9 +97,16 @@ var OpenGraph = /*#__PURE__*/function () {
 
     for (var k in obj) {
       var v = obj[k];
-      if (!v) continue;
+
+      if (!v) {
+        continue;
+      }
+
       var property = prefix ? prefix + ':' + k : k;
-      if (trimLastPart.includes(property)) property = prefix;
+
+      if (trimLastPart.includes(property)) {
+        property = prefix;
+      }
 
       if (v.constructor === Object) {
         result = result.concat(this.parse(v, property));
